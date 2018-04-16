@@ -12,20 +12,20 @@ namespace AccuWeather
         public Button addCity;
         public ListView customList;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle state)
         {
-            base.OnCreate(savedInstanceState);
+            base.OnCreate(state);
             SetContentView(Resource.Layout.Main);
 
             addCity = FindViewById<Button>(Resource.Id.addCity);
             customList = FindViewById<ListView>(Resource.Id.customList);
 
-            addCity.Click += OnSearchClick;
+            addCity.Click += OnAddCityClick;
 
             customList.Adapter = new ArrayAdapter<CityWeather>(this, Android.Resource.Layout.SimpleListItem1, Android.Resource.Id.Text1 /* , + list of cities */); 
         }
 
-        public void OnSearchClick(object sender, EventArgs e)
+        void OnAddCityClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(SearchActivity));
 

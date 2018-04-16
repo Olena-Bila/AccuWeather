@@ -1,0 +1,8 @@
+﻿
+namespace AccuWeather
+{
+    class GetCities
+    {
+
+    }
+}
