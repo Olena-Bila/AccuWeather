@@ -47,8 +47,11 @@ namespace AccuWeather
 			// aapt resource value: 0x7f040000
 			public const int addCity = 2130968576;
 			
-			// aapt resource value: 0x7f040005
-			public const int cityList = 2130968581;
+			// aapt resource value: 0x7f040002
+			public const int back = 2130968578;
+			
+			// aapt resource value: 0x7f040006
+			public const int cityList = 2130968582;
 			
 			// aapt resource value: 0x7f040001
 			public const int customList = 2130968577;
@@ -56,11 +59,11 @@ namespace AccuWeather
 			// aapt resource value: 0x7f040004
 			public const int input = 2130968580;
 			
-			// aapt resource value: 0x7f040003
-			public const int search = 2130968579;
+			// aapt resource value: 0x7f040005
+			public const int search = 2130968581;
 			
-			// aapt resource value: 0x7f040002
-			public const int title = 2130968578;
+			// aapt resource value: 0x7f040003
+			public const int title = 2130968579;
 			
 			static Id()
 			{

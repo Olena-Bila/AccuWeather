@@ -3,6 +3,9 @@ using Android.Widget;
 using Android.OS;
 using System;
 using Android.Content;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Android.Preferences;
 
 namespace AccuWeather
 {
@@ -11,6 +14,9 @@ namespace AccuWeather
     {
         public Button addCity;
         public ListView customList;
+        public Button refreshData;
+
+        public List<CityWeather> cityWeatherList = new List<CityWeather>();
 
         protected override void OnCreate(Bundle state)
         {
@@ -21,14 +27,24 @@ namespace AccuWeather
             customList = FindViewById<ListView>(Resource.Id.customList);
 
             addCity.Click += OnAddCityClick;
+        }
 
-            customList.Adapter = new ArrayAdapter<CityWeather>(this, Android.Resource.Layout.SimpleListItem1, Android.Resource.Id.Text1 /* , + list of cities */); 
+        protected override void OnResume()
+        {
+            var prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+            var value = prefs.GetString("cities",string.Empty);
+
+            if (value != string.Empty)
+            {
+                var cities = JsonConvert.DeserializeObject<List<CityWeather>>(value);
+                new GetWeather { activity = this }.RefreshData(cities);
+            }
+            base.OnResume();
         }
 
         void OnAddCityClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(SearchActivity));
-
             StartActivity(intent);
         }
 

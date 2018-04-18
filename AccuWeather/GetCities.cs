@@ -19,15 +19,15 @@ namespace AccuWeather
             String searchQuery = query;
 
             List<SearchCityResponseModel> responseFromServer = apiHelper.GetCitySearchApiResponse(searchQuery, apiKey);
-
             List<String> cities = new List<String>();
 
             foreach (SearchCityResponseModel city in responseFromServer)
             {
+                activity.searchCityList.Add(new CityWeather(city.Key, city.LocalizedName));
                 cities.Add(city.LocalizedName);
-            }
+            }           
 
-            activity.cityList.Adapter = new ArrayAdapter<String>(activity, Android.Resource.Layout.SimpleListItem1, Android.Resource.Id.Text1, cities);
+            activity.cityList.Adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleListItem1, Android.Resource.Id.Text1, cities);
         }
     }
 }
