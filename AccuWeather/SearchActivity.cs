@@ -4,55 +4,58 @@ using Android.OS;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using AccuWeather.Utils;
+using Helpers.Models;
 
 namespace AccuWeather
 {
     [Activity(Label = "Add City")]
     public class SearchActivity : Activity
     {
-        public EditText input;
-        public Button search;
-        public ListView cityList;
-        public Button back;
+        public Button Back;
+        public Button Search;
+        public EditText Input;
+        public ListView CityList;
 
-        public List<CityWeather> searchCityList = new List<CityWeather>();
-        public List<CityWeather> selectedCities = new List<CityWeather>();
+        public PrefsHelper PrefsHelper;
+        public ListViewHelper ListViewHelper;
+
+        public List<CityWeather> SearchCityList = new List<CityWeather>();
+        public List<CityWeather> SelectedCities = new List<CityWeather>();
 
         protected override void OnCreate(Bundle state)
         {
             base.OnCreate(state);
             SetContentView(Resource.Layout.Search);
 
-            input = FindViewById<EditText>(Resource.Id.input);
-            search = FindViewById<Button>(Resource.Id.search);
-            cityList = FindViewById<ListView>(Resource.Id.cityList);
-            back = FindViewById<Button>(Resource.Id.back);
+            PrefsHelper = new PrefsHelper();;
+            ListViewHelper = new ListViewHelper();;
 
-            search.Click += OnSearchClick;
-            cityList.ItemClick += OnCityNameClick;
-            back.Click += OnBackClick;
+            Back = FindViewById<Button>(Resource.Id.back);
+            Input = FindViewById<EditText>(Resource.Id.input);
+            Search = FindViewById<Button>(Resource.Id.search);
+            CityList = FindViewById<ListView>(Resource.Id.cityList);
+
+            Back.Click += OnBackClick;
+            Search.Click += OnSearchClick;
+            CityList.ItemClick += OnCityNameClick;
         }
 
-        void OnSearchClick(object sender, EventArgs e)
+        private void OnSearchClick(object sender, EventArgs e)
         {
-            new GetCities { activity = this }.GetCitiesList(input.Text);
+            ListViewHelper.GetCitiesList(this, Input.Text);
         }
 
-        void OnCityNameClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void OnCityNameClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            int position = e.Position;
-            selectedCities.Add(searchCityList[position]);
-
+            SelectedCities.Add(SearchCityList[e.Position]);
             Toast.MakeText(this, "City is added to your list", ToastLength.Long).Show();
         }
 
-        void OnBackClick(object sender, EventArgs e)
+        private void OnBackClick(object sender, EventArgs e)
         {
-            SaveData SaveData = new SaveData();
-            SaveData.SaveCityList(this, selectedCities);
-
-            var intent = new Intent(this, typeof(MainActivity));
-            StartActivity(intent);
+            PrefsHelper.AddCities(this, SelectedCities);
+            StartActivity(new Intent(this, typeof(MainActivity)));
         }
     }
 }

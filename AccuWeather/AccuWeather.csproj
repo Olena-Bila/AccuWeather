@@ -57,16 +57,8 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\ApiCaller.cs" />
-    <Compile Include="API\ApiHelper.cs" />
-    <Compile Include="API\WeatherResponseModel.cs" />
-    <Compile Include="API\SearchCityResponseModel.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="GetWeather.cs" />
-    <Compile Include="GetCities.cs" />
-    <Compile Include="Interfaces\IApiCaller.cs" />
-    <Compile Include="SaveData.cs" />
-    <Compile Include="Weather.cs" />
+    <Compile Include="Utils\ListViewHelper.cs" />
+    <Compile Include="Utils\PrefsHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +86,12 @@
     <Folder Include="Resources\mipmap-xhdpi\" />
     <Folder Include="Resources\mipmap-xxhdpi\" />
     <Folder Include="Resources\mipmap-xxxhdpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{e19cc816-31db-452a-aeef-01e98bc09d9b}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

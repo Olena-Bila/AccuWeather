@@ -26,6 +26,9 @@ namespace AccuWeather
 		
 		public static void UpdateIdValues()
 		{
+			global::Helpers.Resource.Id.title = global::AccuWeather.Resource.Id.title;
+			global::Helpers.Resource.String.app_name = global::AccuWeather.Resource.String.app_name;
+			global::Helpers.Resource.String.hello = global::AccuWeather.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -97,8 +100,11 @@ namespace AccuWeather
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f030001
+			public const int app_name = 2130903041;
+			
 			// aapt resource value: 0x7f030000
-			public const int app_name = 2130903040;
+			public const int hello = 2130903040;
 			
 			static String()
 			{
