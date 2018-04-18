@@ -17,7 +17,7 @@ namespace UITestProject
             app = ConfigureApp
                     .Android
                     .Debug()
-                    .ApkFile(@"C:\Users\admin\source\repos\AccuWeather\AccuWeather.AccuWeather.apk")
+                    .ApkFile(@"..\..\..\..\AccuWeather\AccuWeather.AccuWeather.apk")
                     .StartApp();
         }
 
