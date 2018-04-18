@@ -61,6 +61,7 @@
     <Compile Include="API\ApiHelper.cs" />
     <Compile Include="API\WeatherResponseModel.cs" />
     <Compile Include="API\SearchCityResponseModel.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="GetWeather.cs" />
     <Compile Include="GetCities.cs" />
     <Compile Include="Interfaces\IApiCaller.cs" />

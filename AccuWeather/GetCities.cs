@@ -9,16 +9,15 @@ namespace AccuWeather
     {
         public SearchActivity activity { get; set; }
 
-        public void GetCitiesList(String query)
+        public async void GetCitiesList(String query)
         {
             ApiCaller caller = new ApiCaller();
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.ApiCaller = caller;
-
-            const String apiKey = "x1mNSJUlJjip9UcRz2rRBU4RpKByCFHR";
+                        
             String searchQuery = query;
 
-            List<SearchCityResponseModel> responseFromServer = apiHelper.GetCitySearchApiResponse(searchQuery, apiKey);
+            List<SearchCityResponseModel> responseFromServer = await apiHelper.GetCitySearchApiResponse(searchQuery, Constants.apiKey);
             List<String> cities = new List<String>();
 
             foreach (SearchCityResponseModel city in responseFromServer)

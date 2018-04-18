@@ -54,7 +54,7 @@ namespace AccuWeather
             cityWeatherList.RemoveAt(position);
 
             SaveData SaveData = new SaveData();
-            SaveData.SaveCityList(this, cityWeatherList);
+            SaveData.RemoveFromList(this, position);
 
             new GetWeather { activity = this }.RefreshData(cityWeatherList);
         }

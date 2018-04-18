@@ -2,21 +2,24 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace AccuWeather.API
 {
     public class ApiCaller : IApiCaller
     {
-        public String DoApiCall(String requestUrl)
+        public async Task<string> DoApiCall(string requestUrl)
         {
             WebRequest request = WebRequest.Create(requestUrl);
-            WebResponse response = request.GetResponse();
-
-            Stream dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
-            String responseFromServer = reader.ReadToEnd();
-
-            return responseFromServer;
+            using (var response = await request.GetResponseAsync())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    return reader.ReadToEnd();
+                }
+            }
         }
+
     }
 }

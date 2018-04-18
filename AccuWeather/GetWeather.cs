@@ -9,19 +9,17 @@ namespace AccuWeather
     {
         public MainActivity activity { get; set; }
 
-        public void RefreshData(List<CityWeather> cities)
+        public async void RefreshData(List<CityWeather> cities)
         {
             ApiCaller caller = new ApiCaller();
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.ApiCaller = caller;
 
-            const String apiKey = "x1mNSJUlJjip9UcRz2rRBU4RpKByCFHR";
-
             List<String> result = new List<String>();
 
             foreach (CityWeather city in cities)
             {
-                WeatherResponseModel apiResponse = apiHelper.GetWeatherApiResponse(city.CityKey, apiKey);
+                WeatherResponseModel apiResponse = await apiHelper.GetWeatherApiResponse(city.CityKey, Constants.apiKey);
                 String temperature = apiResponse.Temperature.Metric.Value.ToString();
                 String weather = apiResponse.WeatherText;
 

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace AccuWeather.Interfaces
 {
     public interface IApiCaller
     {
-        String DoApiCall(String requestUrl);
+        Task<string> DoApiCall(String requestUrl);
     }
 }
