@@ -2,7 +2,6 @@
 using Android.Widget;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AccuWeather
 {
@@ -16,7 +15,7 @@ namespace AccuWeather
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.ApiCaller = caller;
 
-            const String apiKey = "eEGAfmLFDCzpMpam7FJLzkQG7xRlG0Ac";
+            const String apiKey = "x1mNSJUlJjip9UcRz2rRBU4RpKByCFHR";
 
             List<String> result = new List<String>();
 
@@ -29,11 +28,7 @@ namespace AccuWeather
                 result.Add($"{city.CityName} Temperature: {temperature} Weather: {weather}");
             }
 
-            activity.customList.Adapter = new ArrayAdapter<String>(
-                activity,
-                Android.Resource.Layout.SimpleListItem1,
-                Android.Resource.Id.Text1,
-                result);
+            activity.customList.Adapter = new ArrayAdapter<String>(activity, Android.Resource.Layout.SimpleListItem1, Android.Resource.Id.Text1, result);
         }
     }
 }

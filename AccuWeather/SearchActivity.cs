@@ -1,9 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Preferences;
 using Android.Widget;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -44,19 +42,14 @@ namespace AccuWeather
         {
             int position = e.Position;
             selectedCities.Add(searchCityList[position]);
+
+            Toast.MakeText(this, "City is added to your list", ToastLength.Long).Show();
         }
 
         void OnBackClick(object sender, EventArgs e)
         {
-            var prefs = PreferenceManager.GetDefaultSharedPreferences(this);
-
-            var value = prefs.GetString("cities", JsonConvert.SerializeObject(new List<CityWeather>(), Formatting.Indented));
-            var cities = JsonConvert.DeserializeObject<List<CityWeather>>(value);
-            cities.AddRange(selectedCities);
-
-            var editor = prefs.Edit();
-            editor.PutString("cities", JsonConvert.SerializeObject(cities, Formatting.Indented));
-            editor.Apply();
+            SaveData SaveData = new SaveData();
+            SaveData.SaveCityList(this, selectedCities);
 
             var intent = new Intent(this, typeof(MainActivity));
             StartActivity(intent);

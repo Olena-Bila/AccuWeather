@@ -64,6 +64,7 @@
     <Compile Include="GetWeather.cs" />
     <Compile Include="GetCities.cs" />
     <Compile Include="Interfaces\IApiCaller.cs" />
+    <Compile Include="SaveData.cs" />
     <Compile Include="Weather.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

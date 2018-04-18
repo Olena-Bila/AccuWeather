@@ -14,7 +14,6 @@ namespace AccuWeather
     {
         public Button addCity;
         public ListView customList;
-        public Button refreshData;
 
         public List<CityWeather> cityWeatherList = new List<CityWeather>();
 
@@ -27,6 +26,7 @@ namespace AccuWeather
             customList = FindViewById<ListView>(Resource.Id.customList);
 
             addCity.Click += OnAddCityClick;
+            customList.ItemClick += OnItemClick;
         }
 
         protected override void OnResume()
@@ -36,8 +36,8 @@ namespace AccuWeather
 
             if (value != string.Empty)
             {
-                var cities = JsonConvert.DeserializeObject<List<CityWeather>>(value);
-                new GetWeather { activity = this }.RefreshData(cities);
+                cityWeatherList = JsonConvert.DeserializeObject<List<CityWeather>>(value);
+                new GetWeather { activity = this }.RefreshData(cityWeatherList);
             }
             base.OnResume();
         }
@@ -48,11 +48,15 @@ namespace AccuWeather
             StartActivity(intent);
         }
 
-        void OnDeleteClick(object sender, AdapterView.ItemClickEventArgs e)
+        void OnItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             int position = e.Position;
+            cityWeatherList.RemoveAt(position);
 
-            // TODO
+            SaveData SaveData = new SaveData();
+            SaveData.SaveCityList(this, cityWeatherList);
+
+            new GetWeather { activity = this }.RefreshData(cityWeatherList);
         }
     }
 }

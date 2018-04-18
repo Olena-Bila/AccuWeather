@@ -15,7 +15,7 @@ namespace AccuWeather
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.ApiCaller = caller;
 
-            const String apiKey = "eEGAfmLFDCzpMpam7FJLzkQG7xRlG0Ac";
+            const String apiKey = "x1mNSJUlJjip9UcRz2rRBU4RpKByCFHR";
             String searchQuery = query;
 
             List<SearchCityResponseModel> responseFromServer = apiHelper.GetCitySearchApiResponse(searchQuery, apiKey);
