@@ -37,8 +37,11 @@ namespace UITestProject
             app.Tap(c => c.Marked("addCity"));
             app.EnterText(c => c.Marked("input"), searchQuery);
             app.Tap(c => c.Marked("search"));
+            app.WaitForElement(c => c.Marked("cityList").Child(0));
 
-            Assert.IsTrue(app.Query(c => c.Marked("cityList"))[0].Text.StartsWith(searchQuery), "The result list matched search query.");
+            String cityName = app.Query(c => c.Marked("cityList").Child(0)).FirstOrDefault().Text;
+
+            Assert.IsTrue(cityName.StartsWith(searchQuery), "The result list matched search query.");
         }
 
         [Test]
@@ -49,15 +52,17 @@ namespace UITestProject
             app.Tap(c => c.Marked("addCity"));
             app.EnterText(c => c.Marked("input"), searchQuery);
             app.Tap(c => c.Marked("search"));
+            app.WaitForElement(c => c.Marked("cityList").Child(0));
 
-            var element = app.Query(c => c.Marked("cityList").Child(0)).FirstOrDefault();
-            String cityName = element.Text;
+            var city = app.Query(c => c.Marked("cityList").Child(0)).FirstOrDefault();
 
-            app.Tap(element.Id);
+            app.Tap(city.Id);
             app.Tap(c => c.Marked("back"));
             app.WaitForElement(c => c.Marked("customList").Child(0));
 
-            Assert.IsTrue(app.Query(c => c.Marked("cityList"))[0].Text.Contains(cityName), "Correct city is added to custom list.");
+            var customCity = app.Query(c => c.Marked("customList").Child(0)).FirstOrDefault();
+
+            Assert.IsTrue(customCity.Text.Contains(city.Text), "Correct city is added to custom list.");
         }
 
         [Test]
@@ -68,6 +73,7 @@ namespace UITestProject
             app.Tap(c => c.Marked("addCity"));
             app.EnterText(c => c.Marked("input"), searchQuery);
             app.Tap(c => c.Marked("search"));
+            app.WaitForElement(c => c.Marked("cityList").Child(0));
 
             var element = app.Query(c => c.Marked("cityList").Child(0)).FirstOrDefault();
 
@@ -79,7 +85,9 @@ namespace UITestProject
 
             app.Tap(city.Id);
 
-            Assert.IsFalse(app.Query(c => c.Marked("customList"))[0].Text.Contains(city.Text), "City is deleted from custom list.");
+            var resultCity = app.Query(c => c.Marked("customList").Child(0)).FirstOrDefault();
+
+            Assert.IsNull(resultCity, "City is deleted from custom list.");
         }
     }
 }
