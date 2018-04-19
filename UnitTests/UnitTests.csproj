@@ -71,15 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccuWeather\AccuWeather.csproj">
-      <Project>{4447e232-d9e0-4512-874d-9f4fddbe02b5}</Project>
-      <Name>AccuWeather</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{e19cc816-31db-452a-aeef-01e98bc09d9b}</Project>
       <Name>Helpers</Name>
